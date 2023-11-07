@@ -3,7 +3,7 @@
 ![Ajax](https://img.shields.io/badge/ajax-yellow)
 
 # Search Pokémon
-Search Pokémon by pokédex entry with ajax no JQuery needed. Just put a number between 1 and 1010 and you'll get the Pokémon.
+Search Pokémon by Pokédex entry with ajax no JQuery needed. Just put a number between 1 and 1017 and you'll get the Pokémon.
 
 # Optional config parameters
 In the if/else condition, you can customize your error alert.
@@ -14,8 +14,22 @@ else {
 }
 ```
 
+Added sweetalert2 for it.
+
+```javascript
+else {
+    Swal.fire("Your message here","","type of alert");
+}
+```
 ## Libraries included
+<p align="left">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=js,bootstrap" />
+  </a>
+</p>
+<br>
 * Bootstrap v5.2.3
+* sweetalert2
 
 ## Contributing
 
@@ -25,8 +39,7 @@ else {
 4. Push to the branch: `git push origin your-branch`
 5. Submit a PR
 
-## Creator
-* <a href="https://github.com/adhirsaurio">Yomerengues</a>
-
-## Maintenance
-![Maintenance](https://img.shields.io/badge/Maintenance-Yes-brightgreen)
+<h3 align="left">Get in touch with me:</h3>
+<p align="left">
+<a href="https://www.linkedin.com/in/adhir-serrano/" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="adhir2099" height="30" width="40" /></a>
+</p>
