@@ -14,8 +14,8 @@ button.addEventListener('click',()=>{
     document.getElementById('searchBox').addEventListener('input', function() {
         let inputValue = parseInt(this.value);
     
-        if (isNaN(inputValue) || inputValue < 1 || inputValue > 1017) {
-            Swal.fire("Choose between 1 and 1017","","warning");
+        if (isNaN(inputValue) || inputValue < 1 || inputValue > 1025) {
+            Swal.fire("Choose between 1 and 1025","","warning");
             this.value = '';
         }
     });
@@ -29,7 +29,7 @@ button.addEventListener('click',()=>{
             img.src = `${datoPokemon.sprites.front_default}`;
             text.textContent = datoPokemon.name.toUpperCase();
         } else {
-            Swal.fire("Choose between 1 and 1017","","warning");
+            Swal.fire("Choose between 1 and 1025","","warning");
         }
     };
 

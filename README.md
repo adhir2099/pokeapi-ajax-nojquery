@@ -3,7 +3,7 @@
 ![Ajax](https://img.shields.io/badge/ajax-yellow)
 
 # Search Pokémon
-Search Pokémon by Pokédex entry with ajax no JQuery needed. Just put a number between 1 and 1017 and you'll get the Pokémon.
+Search Pokémon by Pokédex entry with ajax no JQuery needed. Just put a number between 1 and 1025 and you'll get the Pokémon.
 
 ## Demo URL
 <p align="left">
