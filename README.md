@@ -7,7 +7,7 @@ Search Pokémon by Pokédex entry with ajax no JQuery needed. Just put a number 
 
 ## Demo URL
 <p align="left">
-  <a href="https://3moondev.com/demos/pokeApi/">
+  <a href="https://adhir2099.github.io/pokeapi-ajax-nojquery/">
     <b>Visit demo here</b>
   </a>
 </p>
