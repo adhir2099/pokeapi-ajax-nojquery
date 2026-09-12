@@ -2,8 +2,17 @@
 ![Bootstrap](https://img.shields.io/badge/bootstrap-5.2.3-black)
 ![Ajax](https://img.shields.io/badge/ajax-yellow)
 
-# Search Pokémon
-Search Pokémon by Pokédex entry with ajax no JQuery needed. Just put a number between 1 and 1025 and you'll get the Pokémon.
+# Pokémon Search
+
+Search for a Pokémon by its Pokédex entry using the PokéAPI and native browser APIs—no jQuery required. Enter a whole number from 1 to 1025 to retrieve the Pokémon's name and artwork.
+
+## Features
+
+- Semantic, keyboard-friendly search form
+- Client-side validation for whole-number Pokédex entries
+- Clear handling for unavailable Pokémon, artwork, and network errors
+- Responsive layout for mobile and desktop screens
+- Protection against stale results when searches finish out of order
 
 ## Demo URL
 <p align="left">
@@ -13,24 +22,17 @@ Search Pokémon by Pokédex entry with ajax no JQuery needed. Just put a number 
 </p>
 
 # API
-For this we're using <a href="https://pokeapi.co">Pokéapi</a> for fetching the Pokémons
 
-# Optional config parameters
-In the if/else condition, you can customize your error alert.
+This project uses <a href="https://pokeapi.co">PokéAPI</a> to fetch Pokémon data.
 
-```javascript
-else {
-    alert('There was an error with the request')
-}
+## Tests
+
+The regression suite uses Node's built-in test runner:
+
+```bash
+node --test tests/search.test.js
 ```
 
-Or using sweetalert.
-
-```javascript
-else {
-    Swal.fire("Your message here","","type of alert");
-}
-```
 ## Libraries included
 <p align="left">
   <a href="https://skillicons.dev">

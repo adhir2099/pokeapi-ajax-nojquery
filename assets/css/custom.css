@@ -1,135 +1,140 @@
-/* ------------------------- SMOOTH SCROLLING ------------------------- */
-html:focus-within{
-	scroll-behavior: smooth;
+:root {
+    --dex-red: #c11;
+    --page-background: #959484;
+    --surface: #f7f7f2;
+    --text: #1f1f1b;
 }
 
-/* Ribbon */
-#forkongithub a{
-  background:#000;
-  color:#fff;
-  text-decoration:none;
-  font-family:arial,sans-serif;
-  text-align:center;
-  font-weight:bold;
-  padding:5px 40px;
-  font-size:1rem;
-  line-height:2rem;
-  position:relative;
-  transition:0.5s;
+* {
+    box-sizing: border-box;
 }
 
-#forkongithub a:hover{
-  background:#c11;
-  color:#fff;
+html:focus-within {
+    scroll-behavior: smooth;
 }
 
-#forkongithub a::before,#forkongithub a::after{
-  content:"";
-  width:100%;
-  display:block;
-  position:absolute;
-  top:1px;
-  left:0;
-  height:1px;
-  background:#fff;
+body {
+    background-color: var(--page-background);
+    color: var(--text);
 }
 
-#forkongithub a::after{
-  bottom:1px;
-  top:auto;
+.search-page {
+    display: grid;
+    justify-items: center;
+    padding-block: 2rem;
 }
 
-body{
-    background-color: #959484fc;
-    overflow: hidden;
-}
-
-.logo{
+.logo {
     display: block;
-    margin: auto;
-    margin-bottom: 20px;
-    width: 250px;
-    height: 100px;
+    width: min(15.625rem, 100%);
+    height: auto;
+    margin-bottom: 1.5rem;
 }
 
-.entry{
+.search-panel {
+    width: min(100%, 28rem);
+    padding: 1.5rem;
     text-align: center;
-    margin: 0 auto;
-    height: 300px;
-    width: 350px;
+    background: var(--surface);
+    border: 0.25rem solid var(--dex-red);
+    border-radius: 0.5rem;
+}
+
+.search-panel h1 {
+    margin: 0;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+}
+
+.search-intro {
+    margin: 0.5rem 0 1.25rem;
+}
+
+.search-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+}
+
+.search-controls {
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    gap: 0.75rem;
 }
 
-.entry input{
+.search-controls input {
+    min-width: 0;
+    flex: 1;
+    padding: 0.5rem 0.75rem;
     text-align: center;
+    border: 0.125rem solid #595952;
+    border-radius: 0.25rem;
 }
 
-.entry button{
-    margin-top: 20px;
-    margin-bottom: -30px;
+.search-controls input:focus-visible,
+.search-controls button:focus-visible,
+#forkongithub a:focus-visible,
+.bg-dex a:focus-visible {
+    outline: 0.1875rem solid #111;
+    outline-offset: 0.1875rem;
 }
 
-.pokemon{
-    width: 150px;
-    height: 150px;
-    margin: 40px auto;
-    display: inline-block;
+.pokemon-result {
+    display: grid;
+    min-height: 12rem;
+    place-items: center;
+    margin-top: 1.25rem;
 }
 
-p{
-    margin-top: -60px;
+.pokemon {
+    width: min(11rem, 100%);
+    height: auto;
 }
 
-img{
-    color: #f2f2f2;
+#info {
+    margin: 0.5rem 0 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
 }
 
-img::before{
-    content: '';
-    color: aliceblue;
+.bg-dex {
+    padding-block: 0.75rem;
+    color: #fff;
+    background-color: var(--dex-red);
 }
 
-img::after{
-    content: ' Sorry broken image';
-    color: aliceblue;
+.bg-dex a {
+    margin-left: 0.5rem;
+    color: inherit;
 }
 
-.bg-dex{
-    background-color: #c11;
-    color:#fff;
+#forkongithub a {
+    position: fixed;
+    z-index: 1;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.375rem 0.75rem;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    background: #111;
+    border-radius: 0.25rem;
 }
 
-/* Media queries */
-@media (min-width:280px) and (max-width:799px){
-    #forkongithub{
-      display: none;
+#forkongithub a:hover {
+    color: #fff;
+    background: var(--dex-red);
+}
+
+@media (max-width: 35rem) {
+    .search-page {
+        padding-block: 1.5rem;
     }
-  }
-  
-  @media screen and (min-width:800px){
-    #forkongithub{
-        position:fixed;
-        display:block;
-        top:0;
-        right:0;
-        width:200px;
-        overflow:hidden;
-        height:200px;
-        z-index:9999;
+
+    #forkongithub {
+        display: none;
     }
-    
-    #forkongithub a{
-        width:200px;
-        position:absolute;
-        top:9px;
-        right:-54px;
-        transform:rotate(45deg);
-        -webkit-transform:rotate(45deg);
-        -ms-transform:rotate(45deg);
-        -moz-transform:rotate(45deg);
-        -o-transform:rotate(45deg);
-        box-shadow:4px 4px 10px rgba(0,0,0,0.8);
+
+    .search-controls {
+        flex-direction: column;
     }
-  }
+}

@@ -1,48 +1,113 @@
-const button = document.getElementById('button');
-const img = document.getElementById('img');
-const text = document.getElementById('info');
-const url = document.getElementById('pokeLogo');
-const searchBox = document.getElementById('searchBox');
+const POKEMON_API_URL = 'https://pokeapi.co/api/v2/pokemon/';
+const MIN_POKEMON_ID = 1;
+const MAX_POKEMON_ID = 1025;
 
-url.setAttribute('src', 'assets/img/logo2.png');
-img.style.display = 'none';
+const elements = {
+    form: document.getElementById('searchForm'),
+    image: document.getElementById('img'),
+    logo: document.getElementById('pokeLogo'),
+    name: document.getElementById('info'),
+    searchBox: document.getElementById('searchBox'),
+};
 
-// Function to validate input value
-function validateInput(inputValue) {
-    const number = parseInt(inputValue);
-    if (isNaN(number) || number < 1 || number > 1025) {
-        Swal.fire("Choose between 1 and 1025", "", "warning");
-        searchBox.value = '';
-        return false;
-    }
-    return true;
+let latestRequest = 0;
+
+elements.logo.src = 'assets/img/logo2.png';
+hidePokemon();
+
+function showAlert(title, icon) {
+    Swal.fire(title, '', icon);
 }
 
-// Function to fetch Pokémon data
-async function fetchPokemonData(pokemonId) {
-    try {
-        const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonId}`);
-        if (!response.ok) {
-            Swal.fire("No response found", "", "error");
+function hidePokemon() {
+    elements.image.style.display = 'none';
+    elements.name.textContent = '';
+}
+
+function validatePokemonId(value) {
+    const pokemonId = Number(value);
+
+    if (!Number.isInteger(pokemonId) || pokemonId < MIN_POKEMON_ID || pokemonId > MAX_POKEMON_ID) {
+        showAlert(`Choose between ${MIN_POKEMON_ID} and ${MAX_POKEMON_ID}`, 'warning');
+        elements.searchBox.value = '';
+        return null;
+    }
+
+    return pokemonId;
+}
+
+function getPokemonImage(sprites) {
+    return sprites?.front_default
+        ?? sprites?.other?.['official-artwork']?.front_default;
+}
+
+function showPokemon(pokemon, requestId) {
+    const imageUrl = getPokemonImage(pokemon.sprites);
+
+    if (!pokemon.name || !imageUrl) {
+        hidePokemon();
+        showAlert('Pokémon details are unavailable', 'error');
+        return;
+    }
+
+    const artwork = new Image();
+
+    artwork.addEventListener('load', () => {
+        if (requestId !== latestRequest) {
+            return;
         }
-        const data = await response.json();
-        img.style.display = '';
-        img.src = data.sprites.front_default;
-        text.textContent = data.name.toUpperCase();
-    } catch (error) {
-        Swal.fire("There was a network error", "", "error");
+
+        elements.image.src = imageUrl;
+        elements.image.alt = `${pokemon.name} artwork`;
+        elements.image.style.display = '';
+        elements.name.textContent = pokemon.name.toUpperCase();
+    });
+
+    artwork.addEventListener('error', () => {
+        if (requestId === latestRequest) {
+            hidePokemon();
+            showAlert('Pokémon artwork is unavailable', 'error');
+        }
+    });
+
+    artwork.src = imageUrl;
+}
+
+async function fetchPokemon(pokemonId, requestId) {
+    try {
+        const response = await fetch(`${POKEMON_API_URL}${pokemonId}`);
+
+        if (!response.ok) {
+            if (requestId === latestRequest) {
+                hidePokemon();
+                showAlert('No Pokémon found', 'error');
+            }
+            return;
+        }
+
+        const pokemon = await response.json();
+
+        if (requestId === latestRequest) {
+            showPokemon(pokemon, requestId);
+        }
+    } catch {
+        if (requestId === latestRequest) {
+            hidePokemon();
+            showAlert('There was a network error', 'error');
+        }
     }
 }
 
-// Event Listener for button click
-button.addEventListener('click', () => {
-    const inputSearch = searchBox.value;
-    if (validateInput(inputSearch)) {
-        fetchPokemonData(inputSearch);
-    }
-});
+elements.form.addEventListener('submit', (event) => {
+    event.preventDefault();
 
-// Event Listener for input validation
-searchBox.addEventListener('input', () => {
-    validateInput(searchBox.value);
+    latestRequest += 1;
+    const requestId = latestRequest;
+    const pokemonId = validatePokemonId(elements.searchBox.value);
+    if (pokemonId === null) {
+        hidePokemon();
+        return;
+    }
+
+    fetchPokemon(pokemonId, requestId);
 });

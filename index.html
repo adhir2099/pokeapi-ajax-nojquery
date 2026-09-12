@@ -1,40 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-    
 <head>
-    <title>Search Pokémon by Pokédex entry with ajax no JQuery</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="author" content="Adhir2099" />
-    <meta name="description" content="Search Pokémon by pokédex entry with ajax no JQuery" />
+    <meta name="author" content="Adhir2099">
+    <meta name="description" content="Search Pokémon by Pokédex entry without jQuery">
+    <title>Pokémon Search</title>
     <link rel="stylesheet" href="assets/css/bootstrap.css">
     <link rel="stylesheet" href="assets/css/bootstrap-icons.css">
     <link rel="stylesheet" href="assets/css/custom.css">
-    <!-- SweetAlert-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/11.0.19/sweetalert2.min.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="d-flex flex-column min-vh-100">
-    
     <span id="forkongithub"><a href="https://github.com/adhir2099/pokeapi-ajax-nojquery">Fork me on GitHub</a></span>
 
-    <img class="logo" id="pokeLogo" alt="Logo">
-    
-    <div class="entry">
-        <input type="number" id="searchBox" placeholder="Pokédex entry">
-        <button class="text-white btn bg-danger" id="button">Search</button>
-        <img id="img" class="pokemon" alt="Pokémon img">
-        <p id="info" class="text-white"></p>
-    </div>
+    <main class="search-page container">
+        <img class="logo" id="pokeLogo" alt="Pokémon logo">
+
+        <section class="search-panel" aria-labelledby="search-title">
+            <h1 id="search-title">Find a Pokémon</h1>
+            <p class="search-intro">Enter a Pokédex number from 1 to 1025.</p>
+
+            <form id="searchForm" class="search-form" novalidate>
+                <label for="searchBox">Pokédex number</label>
+                <div class="search-controls">
+                    <input id="searchBox" name="pokemonId" type="number" min="1" max="1025" step="1" inputmode="numeric" placeholder="e.g. 25" required>
+                    <button class="btn btn-danger" type="submit">Search</button>
+                </div>
+            </form>
+
+            <div class="pokemon-result" aria-live="polite" aria-atomic="true">
+                <img id="img" class="pokemon" alt="">
+                <p id="info"></p>
+            </div>
+        </section>
+    </main>
 
     <footer class="text-center mt-auto bg-dex">
         <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <p class="lead mb-0"><b>Pokémon search by Pokédex entry no JQuery</b><a href="https://github.com/adhir2099/pokeapi-ajax-nojquery"><i class="bi bi-github"></i></a></p>
-                </div>
-            </div>
+            <p class="lead mb-0">Pokémon search by Pokédex entry, without jQuery <a href="https://github.com/adhir2099/pokeapi-ajax-nojquery" aria-label="View this project on GitHub"><i class="bi bi-github" aria-hidden="true"></i></a></p>
         </div>
     </footer>
 
